@@ -782,3 +782,21 @@ function joueurDansTerrainFunction(playerName,position) {
     joueurChangementFunction()
     document.getElementById("svg").classList.remove("animate-spin");
 }
+
+function stockerJoueursDansLocalStorage() {
+    // Parcourir chaque position dans joueurChangement
+    for (let position in joueurChangement) {
+        // Vérifier si la position a des joueurs
+        if (joueurChangement[position].length > 0) {
+            // Convertir les joueurs en JSON et les stocker dans localStorage
+            localStorage.setItem(position, JSON.stringify(joueurChangement[position]));
+            console.log(`Joueurs pour la position ${position} stockés dans localStorage.`);
+        } else {
+            console.log(`Aucun joueur à stocker pour la position ${position}.`);
+        }
+    }
+    
+    // Optionnel : stocker tous les joueurs dans un seul objet
+    localStorage.setItem("tousLesJoueurs", JSON.stringify(joueurChangement));
+    console.log("Tous les joueurs stockés dans localStorage sous 'tousLesJoueurs'.");
+}
