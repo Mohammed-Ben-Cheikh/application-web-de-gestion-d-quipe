@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="./output.css" rel="stylesheet">
-  <link href="./css/style.css" rel="stylesheet">
+  <link href="./src/output.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
   <title>EA FC 25 Squad Builder</title>
 </head>
 
@@ -55,11 +55,299 @@
 
   <main class="h-[150vh] px-4">
     <section class="w-[90vw] h-[150vh] flex flex-wrap">
+      <div id="terrain-contents" class="w-full h-[100vh] lg:w-[70%] flex justify-center">
+        <div id="terrain" class="relative border-white border-4 w-full h-full bg-[#0a2e1a]">
+          <img class="w-full h-full" src="/images/stadium_background.webp" alt="terrain">
+          <div id="aa" class="flex flex-col absolute left-0 top-0 w-full h-full p-4">
 
+            <!--  -->
+            <div id="atak" class="flex w-[100%] h-[25%] justify-center gap-10 sm:gap-14  mb-1">
+
+              <div id="LW" class="relative flex flex-col items-center w-[16%] h-[100%]"
+                onclick="ajoutDansTerrain(this.id)">
+                <!-- Carte -->
+                <div id="car"
+                  class="relative w-[100%] h-[100%] bg-black rounded-lg shadow-lg transition-transform transform hover:scale-105 group">
+                  <!-- Effet lumineux au survol -->
+                  <div
+                    class="bg-green-500 opacity-20 hover:blur-xl rounded-lg group-hover:blur-2xl transition-all duration-300 w-[100%] h-[100%]">
+                  </div>
+                  <!-- Contenu de la carte -->
+                  <div class="absolute inset-0 flex items-center justify-center z-20">
+                    <div class="w-4 h-4 md:w-8 md:h-8 border-2 border-green-500 flex items-center justify-center">
+                      <span class="text-green-500 md:text-2xl text-lg font-bold">+</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bouton "LW" -->
+                <button
+                  class="w-8 h-5 md:w-12 md:h-6 mt-[0.2rem] pt-[0.15rem] bg-gray-900 text-white md:font-medium text-xs md:text-sm rounded-full shadow-md hover:bg-gray-700 focus:outline-none">
+                  LW
+                </button>
+              </div>
+
+              <div id="ST" class="relative flex flex-col items-center w-[16%] h-[100%]"
+                onclick="ajoutDansTerrain(this.id)">
+                <!-- Carte -->
+                <div
+                  class="relative w-[100%] h-[100%] bg-black rounded-lg shadow-lg transition-transform transform hover:scale-105 group">
+                  <!-- Effet lumineux au survol -->
+                  <div
+                    class="bg-green-500 opacity-20 hover:blur-xl rounded-lg group-hover:blur-2xl transition-all duration-300 w-[100%] h-[100%]">
+                  </div>
+                  <!-- Contenu de la carte -->
+                  <div class="absolute inset-0 flex items-center justify-center z-20">
+                    <div class="w-4 h-4 md:w-8 md:h-8 border-2 border-green-500 flex items-center justify-center">
+                      <span class="text-green-500 md:text-2xl text-lg font-bold">+</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bouton "ST" -->
+                <button
+                  class="w-8 h-5 md:w-12 md:h-6 mt-[0.2rem] pt-[0.15rem] bg-gray-900 text-white md:font-medium text-xs md:text-sm rounded-full shadow-md hover:bg-gray-700 focus:outline-none">
+                  ST
+                </button>
+              </div>
+
+              <div id="RW" class="relative flex flex-col items-center w-[16%] h-[100%]"
+                onclick="ajoutDansTerrain(this.id)">
+                <!-- Carte -->
+                <div
+                  class="relative w-[100%] h-[100%] bg-black rounded-lg shadow-lg transition-transform transform hover:scale-105 group">
+                  <!-- Effet lumineux au survol -->
+                  <div
+                    class="bg-green-500 opacity-20 hover:blur-xl rounded-lg group-hover:blur-2xl transition-all duration-300 w-[100%] h-[100%]">
+                  </div>
+                  <!-- Contenu de la carte -->
+                  <div class="absolute inset-0 flex items-center justify-center z-20">
+                    <div class="w-4 h-4 md:w-8 md:h-8 border-2 border-green-500 flex items-center justify-center">
+                      <span class="text-green-500 md:text-2xl text-lg font-bold">+</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bouton "RW" -->
+                <button
+                  class="w-8 h-5 md:w-12 md:h-6 mt-[0.2rem] pt-[0.15rem] bg-gray-900 text-white md:font-medium text-xs md:text-sm rounded-full shadow-md hover:bg-gray-700 focus:outline-none">
+                  RW
+                </button>
+              </div>
+
+            </div>
+            <!-- -->
+            <div id="cent" class="flex w-[100%] h-[25%] justify-center gap-16 sm:gap-[7rem] mb-1">
+
+              <div id="LCM" class="relative flex flex-col items-center w-[16%] h-[100%]"
+                onclick="ajoutDansTerrain(this.id)">
+                <!-- Carte -->
+                <div
+                  class="relative w-[100%] h-[100%] bg-black rounded-lg shadow-lg transition-transform transform hover:scale-105 group">
+                  <!-- Effet lumineux au survol -->
+                  <div
+                    class="bg-green-500 opacity-20 hover:blur-xl rounded-lg group-hover:blur-2xl transition-all duration-300 w-[100%] h-[100%]">
+                  </div>
+                  <!-- Contenu de la carte -->
+                  <div class="absolute inset-0 flex items-center justify-center z-20">
+                    <div class="w-4 h-4 md:w-8 md:h-8 border-2 border-green-500 flex items-center justify-center">
+                      <span class="text-green-500 md:text-2xl text-lg font-bold">+</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bouton "CM" -->
+                <button
+                  class="w-8 h-5 md:w-12 md:h-6 mt-[0.2rem] pt-[0.15rem] bg-gray-900 text-white md:font-medium text-xs md:text-sm rounded-full shadow-md hover:bg-gray-700 focus:outline-none">
+                  CM
+                </button>
+              </div>
+
+              <div id="CM" class="relative flex flex-col items-center w-[16%] h-[100%]"
+                onclick="ajoutDansTerrain(this.id)">
+                <!-- Carte -->
+                <div
+                  class="relative w-[100%] h-[100%] bg-black rounded-lg shadow-lg transition-transform transform hover:scale-105 group">
+                  <!-- Effet lumineux au survol -->
+                  <div
+                    class="bg-green-500 opacity-20 hover:blur-xl rounded-lg group-hover:blur-2xl transition-all duration-300 w-[100%] h-[100%]">
+                  </div>
+                  <!-- Contenu de la carte -->
+                  <div class="absolute inset-0 flex items-center justify-center z-20">
+                    <div class="w-4 h-4 md:w-8 md:h-8 border-2 border-green-500 flex items-center justify-center">
+                      <span class="text-green-500 md:text-2xl text-lg font-bold">+</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bouton "CM" -->
+                <button
+                  class="w-8 h-5 md:w-12 md:h-6 mt-[0.2rem] pt-[0.15rem] bg-gray-900 text-white md:font-medium text-xs md:text-sm rounded-full shadow-md hover:bg-gray-700 focus:outline-none">
+                  CM
+                </button>
+              </div>
+
+              <div id="RCM" class="relative flex flex-col items-center w-[16%] h-[100%]"
+                onclick="ajoutDansTerrain(this.id)">
+                <!-- Carte -->
+                <div
+                  class="relative w-[100%] h-[100%] bg-black rounded-lg shadow-lg transition-transform transform hover:scale-105 group">
+                  <!-- Effet lumineux au survol -->
+                  <div
+                    class="bg-green-500 opacity-20 hover:blur-xl rounded-lg group-hover:blur-2xl transition-all duration-300 w-[100%] h-[100%]">
+                  </div>
+                  <!-- Contenu de la carte -->
+                  <div class="absolute inset-0 flex items-center justify-center z-20">
+                    <div class="w-4 h-4 md:w-8 md:h-8 border-2 border-green-500 flex items-center justify-center">
+                      <span class="text-green-500 md:text-2xl text-lg font-bold">+</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bouton "CM" -->
+                <button
+                  class="w-8 h-5 md:w-12 md:h-6 mt-[0.2rem] pt-[0.15rem] bg-gray-900 text-white md:font-medium text-xs md:text-sm rounded-full shadow-md hover:bg-gray-700 focus:outline-none">
+                  CM
+                </button>
+              </div>
+
+            </div>
+            <!--  -->
+            <div id="def" class="flex w-[100%] h-[25%] justify-around gap-6 mb-1">
+
+              <div id="LB" class="relative flex flex-col items-center w-[16%] h-[100%]"
+                onclick="ajoutDansTerrain(this.id)">
+                <!-- Carte -->
+                <div
+                  class="relative w-[100%] h-[100%] bg-black rounded-lg shadow-lg transition-transform transform hover:scale-105 group">
+                  <!-- Effet lumineux au survol -->
+                  <div
+                    class="bg-green-500 opacity-20 hover:blur-xl rounded-lg group-hover:blur-2xl transition-all duration-300 w-[100%] h-[100%]">
+                  </div>
+                  <!-- Contenu de la carte -->
+                  <div class="absolute inset-0 flex items-center justify-center z-20">
+                    <div class="w-4 h-4 md:w-8 md:h-8 border-2 border-green-500 flex items-center justify-center">
+                      <span class="text-green-500 md:text-2xl text-lg font-bold">+</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bouton "LB" -->
+                <button
+                  class="w-8 h-5 md:w-12 md:h-6 mt-[0.2rem] pt-[0.15rem] bg-gray-900 text-white md:font-medium text-xs md:text-sm rounded-full shadow-md hover:bg-gray-700 focus:outline-none">
+                  LB
+                </button>
+              </div>
+
+              <div id="LCB" class="relative flex flex-col items-center w-[16%] h-[100%]"
+                onclick="ajoutDansTerrain(this.id)">
+                <!-- Carte -->
+                <div
+                  class="relative w-[100%] h-[100%] bg-black rounded-lg shadow-lg transition-transform transform hover:scale-105 group">
+                  <!-- Effet lumineux au survol -->
+                  <div
+                    class="bg-green-500 opacity-20 hover:blur-xl rounded-lg group-hover:blur-2xl transition-all duration-300 w-[100%] h-[100%]">
+                  </div>
+                  <!-- Contenu de la carte -->
+                  <div class="absolute inset-0 flex items-center justify-center z-20">
+                    <div class="w-4 h-4 md:w-8 md:h-8 border-2 border-green-500 flex items-center justify-center">
+                      <span class="text-green-500 md:text-2xl text-lg font-bold">+</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bouton "CB" -->
+                <button
+                  class="w-8 h-5 md:w-12 md:h-6 mt-[0.2rem] pt-[0.15rem] bg-gray-900 text-white md:font-medium text-xs md:text-sm rounded-full shadow-md hover:bg-gray-700 focus:outline-none">
+                  CB
+                </button>
+              </div>
+
+              <div id="RCB" class="relative flex flex-col items-center w-[16%] h-[100%]"
+                onclick="ajoutDansTerrain(this.id)">
+                <!-- Carte -->
+                <div
+                  class="relative w-[100%] h-[100%] bg-black rounded-lg shadow-lg transition-transform transform hover:scale-105 group">
+                  <!-- Effet lumineux au survol -->
+                  <div
+                    class="bg-green-500 opacity-20 hover:blur-xl rounded-lg group-hover:blur-2xl transition-all duration-300 w-[100%] h-[100%]">
+                  </div>
+                  <!-- Contenu de la carte -->
+                  <div class="absolute inset-0 flex items-center justify-center z-20">
+                    <div class="w-4 h-4 md:w-8 md:h-8 border-2 border-green-500 flex items-center justify-center">
+                      <span class="text-green-500 md:text-2xl text-lg font-bold">+</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bouton "CB" -->
+                <button
+                  class="w-8 h-5 md:w-12 md:h-6 mt-[0.2rem] pt-[0.15rem] bg-gray-900 text-white md:font-medium text-xs md:text-sm rounded-full shadow-md hover:bg-gray-700 focus:outline-none">
+                  CB
+                </button>
+              </div>
+
+              <div id="RB" class="relative flex flex-col items-center w-[16%] h-[100%]"
+                onclick="ajoutDansTerrain(this.id)">
+                <!-- Carte -->
+                <div
+                  class="relative w-[100%] h-[100%] bg-black rounded-lg shadow-lg transition-transform transform hover:scale-105 group">
+                  <!-- Effet lumineux au survol -->
+                  <div
+                    class="bg-green-500 opacity-20 hover:blur-xl rounded-lg group-hover:blur-2xl transition-all duration-300 w-[100%] h-[100%]">
+                  </div>
+                  <!-- Contenu de la carte -->
+                  <div class="absolute inset-0 flex items-center justify-center z-20">
+                    <div class="w-4 h-4 md:w-8 md:h-8 border-2 border-green-500 flex items-center justify-center">
+                      <span class="text-green-500 md:text-2xl text-lg font-bold">+</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bouton "RB" -->
+                <button
+                  class="w-8 h-5 md:w-12 md:h-6 mt-[0.2rem] pt-[0.15rem] bg-gray-900 text-white md:font-medium text-xs md:text-sm rounded-full shadow-md hover:bg-gray-700 focus:outline-none">
+                  RB
+                </button>
+              </div>
+
+            </div>
+            <!--  -->
+            <div id="gool" class="flex w-[100%] h-[25%] justify-around">
+
+              <div id="GK" class="relative flex flex-col items-center w-[16%] h-[100%]"
+                onclick="ajoutDansTerrain(this.id)">
+                <!-- Carte -->
+                <div
+                  class="relative w-[100%] h-[100%] bg-black rounded-lg shadow-lg transition-transform transform hover:scale-105 group">
+                  <!-- Effet lumineux au survol -->
+                  <div
+                    class="bg-green-500 opacity-20 hover:blur-xl rounded-lg group-hover:blur-2xl transition-all duration-300 w-[100%] h-[100%]">
+                  </div>
+                  <!-- Contenu de la carte -->
+                  <div class="absolute inset-0 flex items-center justify-center z-20">
+                    <div class="w-4 h-4 md:w-8 md:h-8 border-2 border-green-500 flex items-center justify-center">
+                      <span class="text-green-500 md:text-2xl text-lg font-bold">+</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bouton "GK" -->
+                <button
+                  class="w-8 h-5 md:w-12 md:h-6 mt-[0.2rem] pt-[0.15rem] bg-gray-900 text-white md:font-medium text-xs md:text-sm rounded-full shadow-md hover:bg-gray-700 focus:outline-none">
+                  GK
+                </button>
+              </div>
+
+            </div>
+            <!--  -->
+
+          </div>
+        </div>
+      </div>
 
     </section>
   </main>
-=======
 
   <script src="/js/app.js"></script>
 </body>
