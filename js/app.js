@@ -642,3 +642,37 @@ function ajoutDansTerrain(id) {
     }
 
 }
+
+function supprimerJoueurDeChangementFunction(playerName) {
+    for (let position in joueurChangement) {
+        joueurChangement[position] = JSON.parse(localStorage.getItem(position));
+        joueurChangement[position] = joueurChangement[position].filter(player => player.name !== playerName);
+        localStorage.setItem(position, JSON.stringify(joueurChangement[position]));
+    }
+}
+
+console.log("Current player changes:", joueurChangement);
+
+function afficherJoueursParPosition(position) {
+    let joueurs = joueurChangement[position];
+    if (joueurs.length > 0) {
+        afficherJoueurs(joueurs);
+    } else {
+        const container = document.getElementById('players-container');
+        container.innerHTML = `
+            <p class="text-yellow-500 text-center">Aucun joueur trouvé pour la position ${position}</p>`;
+    }
+}
+
+function filterJoueursParPosition(id) {
+    const positionMap = {
+        "LCB": "CB",
+        "RCB": "CB",
+        "LCM": "CM",
+        "CM": "CM",
+        "RCM": "CM"
+    };
+
+    const positionToDisplay = positionMap[id] || id; // Use mapped position or the original id
+    afficherJoueursParPosition(positionToDisplay);
+}
