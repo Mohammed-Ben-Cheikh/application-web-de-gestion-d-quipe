@@ -733,3 +733,52 @@ function createEmptyCard(parentElementId, playerPosition, playerName) {
     }
     document.getElementById("svg").classList.remove("animate-spin");
 }
+
+
+function filterJoueursParPosition(id) {
+    const positionMap = {
+        "LCB": "CB",
+        "RCB": "CB",
+        "LCM": "CM",
+        "CM": "CM",
+        "RCM": "CM"
+    };
+
+    const positionToDisplay = positionMap[id] || id; // Use mapped position or the original id
+    afficherJoueursParPosition(positionToDisplay);
+}
+
+function joueurDansTerrainFunction(playerName,position) {
+    let joueurPosition = localStorage.getItem("joueur Position:");
+    console.log(joueurPosition);
+    let player = null;
+    for (let position in joueurChangement) {
+        let players = joueurChangement[position];
+        if (players && players.length > 0) {
+            player = players.find(p => p.name === playerName);
+            if (player) {
+                for (let position in joueurDansTerrain) {
+                    if (joueurPosition === position) {
+                        let data = JSON.parse(localStorage.getItem("joueurDansTerrain"));
+                        if (joueurDansTerrain[position].length === 0 && data[position].length === 0) {
+                            supprimerJoueurDeChangementFunction(playerName)
+                            joueurDansTerrain[position].push(player);
+                            localStorage.setItem("joueurDansTerrain", JSON.stringify(joueurDansTerrain));
+                            afficherJoueursDansTerrain()
+                        } else {
+                            alert(`Un joueur est déjà présent dans la position ${position}.`);
+                        }
+                    }
+                }
+                console.log("Player found:", player);
+                break;
+            }
+        }
+    }
+    if (!player) {
+        console.log("Player not found");
+    }
+    localStorage.removeItem("joueur Position:");
+    joueurChangementFunction()
+    document.getElementById("svg").classList.remove("animate-spin");
+}
