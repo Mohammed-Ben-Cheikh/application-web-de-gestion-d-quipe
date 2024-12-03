@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="./src/output.css" rel="stylesheet">
-  <link href="./css/style.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
   <title>EA FC 25 Squad Builder</title>
 </head>
 
@@ -52,6 +52,182 @@
       </button>
     </div>
   </header>
+  <div id="addPlayerForm" class=" w-full h-full hidden">
+    <div class="bg-black bg-opacity-75 w-[100%] h-[100%] flex items-center justify-self-center fixed z-50">
+      <form class="p-6 pt-2 bg-gray-800 rounded-lg shadow-lg w-96 h-96 mx-auto overflow-y-scroll">
+        <button type="button" onclick="afficherFermerFormule('close')"
+          class="bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center ">
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+          </svg>
+        </button>
+        <h2 class="text-2xl font-bold text-white mb-4">Ajouter les informations du joueur</h2>
+        <div id="playersName" class="mb-4 ">
+          <!-- Nom -->
+          <label for="playerName" class="block text-white font-semibold mb-1">Nom :</label>
+          <input type="text" id="playerName" name="name"
+            class="w-full p-2 mb-4 rounded border focus:outline-none text-black" placeholder="Nom du joueur"  />
+        </div>
+        <div id="playerData" class="mb-4">
+          <!-- Note -->
+          <label for="playerRating" class="block text-white font-semibold mb-1">Note :</label>
+          <input type="number" id="playerRating" name="rating"
+            class="w-full p-2 mb-4 rounded border focus:outline-none text-black" placeholder="Note du joueur" min="0"
+            max="100"  />
+          <!-- Position -->
+          <label for="playerPosition" class="text-white mb-1">Position :</label>
+          <select id="playerPosition" name="position" onchange="afficherStats()"
+            class="w-full p-2 mb-4 rounded border focus:outline-none text-black" >
+            <option value="" disabled selected>Choisissez une position</option>
+            <option value="GK">GK</option>
+            <option value="LB">LB</option>
+            <option value="CB">CB</option>
+            <option value="RB">RB</option>
+            <option value="LM">LM</option>
+            <option value="CM">CM</option>
+            <option value="RM">RM</option>
+            <option value="LW">LW</option>
+            <option value="ST">ST</option>
+            <option value="RW">RW</option>
+          </select>
+          <!-- Photo -->
+          <label for="playerPhoto" class="block text-white font-semibold mb-1">Photo :</label>
+          <input type="url" id="playerPhoto" name="photo"
+            class="w-full p-2 mb-4 rounded border focus:outline-none text-black" placeholder="Lien de la photo"
+             />
+
+          <div class="flex justify-end items-center gap-8 mb-4">
+            <!-- Sélecteur de nationalité -->
+            <div>
+              <label for="nationalitySelect" class="block text-white font-semibold">Choisissez une nationalité
+                :</label>
+              <select id="nationalitySelect" name="nationality"
+                class="w-full p-2 rounded border focus:outline-none text-black" 
+                onchange="updateNationalityFlag()">
+                <option value="" disabled selected>Choisissez une nationalité</option>
+                <option value="https://cdn.sofifa.net/flags/ar.png">Argentine</option>
+                <option value="https://cdn.sofifa.net/flags/pt.png">Portugaise</option>
+                <option value="https://cdn.sofifa.net/flags/be.png">Belge</option>
+                <option value="https://cdn.sofifa.net/flags/fr.png">Française</option>
+                <option value="https://cdn.sofifa.net/flags/nl.png">Néerlandaise</option>
+                <option value="https://cdn.sofifa.net/flags/de.png">Allemande</option>
+                <option value="https://cdn.sofifa.net/flags/br.png">Brésilienne</option>
+                <option value="https://cdn.sofifa.net/flags/eg.png">Égyptienne</option>
+                <option value="https://cdn.sofifa.net/flags/hr.png">Croate</option>
+                <option value="https://cdn.sofifa.net/flags/ca.png">Canadienne</option>
+                <option value="https://cdn.sofifa.net/flags/ma.png">Marocaine</option>
+                <option value="https://cdn.sofifa.net/flags/it.png">Italienne</option>
+                <option value="https://cdn.sofifa.net/flags/no.png">Norvégienne</option>
+                <option value="https://cdn.sofifa.net/flags/gb-eng.png">Anglaise</option>
+              </select>
+            </div>
+            <!-- Afficher le drapeau de la nationalité sélectionnée -->
+            <div id="nationalityFlagContainer">
+              <img id="nationalityFlag" src="#" alt="Drapeau de la nationalité" class="hidden w-14 h-auto" />
+            </div>
+          </div>
+
+          <div class="flex justify-end items-center gap-8">
+            <!-- Logo du club -->
+            <div>
+              <label for="clubSelect" class="block text-white font-semibold">Logo du Club :</label>
+              <select id="clubSelect" name="logo" class="w-full p-2 rounded border focus:outline-none text-black"
+                 onchange="updateClubLogo()">
+                <option value="" disabled selected>Choisissez un club</option>
+                <option value="https://cdn.sofifa.net/meta/team/239235/120.png">Inter Miami</option>
+                <option value="https://cdn.sofifa.net/meta/team/2506/120.png">Al Nassr</option>
+                <option value="https://cdn.sofifa.net/meta/team/9/120.png">Manchester City</option>
+                <option value="https://cdn.sofifa.net/meta/team/3468/120.png">Real Madrid</option>
+                <option value="https://cdn.sofifa.net/meta/team/8/120.png">Liverpool</option>
+                <option value="https://cdn.sofifa.net/meta/team/7011/120.png">Al-Hilal</option>
+                <option value="https://cdn.sofifa.net/meta/team/503/120.png">Bayern Munich</option>
+                <option value="https://cdn.sofifa.net/meta/team/7980/120.png">Atletico Madrid</option>
+                <option value="https://cdn.sofifa.net/meta/team/476/120.png">Al-Ittihad</option>
+                <option value="https://cdn.sofifa.net/meta/team/591/120.png">Paris Saint-Germain</option>
+                <option value="https://cdn.sofifa.net/meta/team/88/120.png">Fenerbahçe</option>
+                <option value="https://cdn.sofifa.net/meta/team/14/120.png">Manchester United</option>
+              </select>
+            </div>
+            <!-- Display the selected club logo -->
+            <div id="clubLogoContainer">
+              <img id="clubLogo" src="#" alt="Club Logo" class="hidden w-14 h-auto" />
+            </div>
+          </div>
+        </div>
+        <!-- goalkeeperStats -->
+        <div id="goalkeeperStats" class="mb-4>
+          <h4 class="text-white font-semibold mb-2">Statistiques Gardien :</h4>
+
+          <label for="diving" class="block text-white mb-1">Plongeon (DIV) :</label>
+          <input type="number" id="diving" name="diving" class="w-full p-2 mb-2 rounded border text-black" min="0"
+            max="100" />
+
+          <label for="handling" class="block text-white mb-1">Maniement (HAN) :</label>
+          <input type="number" id="handling" name="handling" class="w-full p-2 mb-2 rounded border text-black" min="0"
+            max="100" />
+
+          <label for="kicking" class="block text-white mb-1">Dégagement (KIC) :</label>
+          <input type="number" id="kicking" name="kicking" class="w-full p-2 mb-2 rounded border text-black" min="0"
+            max="100" />
+
+          <label for="reflexes" class="block text-white mb-1">Réflexes (REF) :</label>
+          <input type="number" id="reflexes" name="reflexes" class="w-full p-2 mb-2 rounded border text-black" min="0"
+            max="100" />
+
+          <label for="speed" class="block text-white mb-1">Vitesse (SPD) :</label>
+          <input type="number" id="speed" name="speed" class="w-full p-2 mb-2 rounded border text-black" min="0"
+            max="100" />
+
+          <label for="positioning" class="block text-white mb-1">Placement (POS) :</label>
+          <input type="number" id="positioning" name="positioning" class="w-full p-2 mb-2 rounded border text-black"
+            min="0" max="100" />
+
+          <!-- Boutons -->
+          <div class="flex justify-around gap-4 w-full">
+            <button onclick="ajouterPlayer()" type="submit" class="w-full px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+              Enregistrer
+            </button>
+          </div>
+        </div>
+        <!-- playerStats -->
+        <div id="playerStats" class="mb-4">
+          <h4 class="text-white font-semibold mb-2">Statistiques Joueur :</h4>
+
+          <label for="pace" class="block text-white mb-1">pace (PAC) :</label>
+          <input type="number" id="pace" name="pace" class="w-full p-2 mb-2 rounded border text-black" min="0" max="100"
+             />
+
+          <label for="shooting" class="block text-white mb-1">shooting (SHO) :</label>
+          <input type="number" id="shooting" name="shooting" class="w-full p-2 mb-2 rounded border text-black" min="0"
+            max="100"  />
+
+          <label for="passing" class="block text-white mb-1">passing (PAS) :</label>
+          <input type="number" id="passing" name="passing" class="w-full p-2 mb-2 rounded border text-black" min="0"
+            max="100"  />
+
+          <label for="dribbling" class="block text-white mb-1">dribbling (DRI) :</label>
+          <input type="number" id="dribbling" name="dribbling" class="w-full p-2 mb-2 rounded border text-black" min="0"
+            max="100"  />
+
+          <label for="defending" class="block text-white mb-1">defending (DEF) :</label>
+          <input type="number" id="defending" name="defending" class="w-full p-2 mb-2 rounded border text-black" min="0"
+            max="100"  />
+
+          <label for="physical" class="block text-white mb-1">physical (PHY) :</label>
+          <input type="number" id="physical" name="physical" class="w-full p-2 mb-2 rounded border text-black" min="0"
+            max="100"  />
+          <!-- Boutons -->
+          <div class="flex justify-around gap-4 w-full">
+            <button onclick="ajouterPlayer()"
+              class="w-full px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+              Enregistrer
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
   <main class="h-[150vh] px-4">
     <section class="mt-24"> 
       <div class="w-full h-[60px] border-white border-4 bg-[#1a1a1a] p-2 flex justify-center gap-4">
@@ -59,7 +235,7 @@
           class="bg-green-600 hover:bg-green-700 w-full h-full text-white text-xs sm:text-sm font-bold rounded-lg">
           Ajouter Nouveaux joueur
         </button>
-        <input class="w-full h-full px-3 py-1 rounded-lg text-black text-sm mt-3 mb-2 outline-none" type="text" name="search"
+        <input class="w-full h-full px-3 py-1 rounded-lg text-black text-sm mb-2 outline-none" type="text" name="search"
           id="search-player" placeholder="Search by name, position, country..." autocomplete="off">
       </div>
     </section>
@@ -371,7 +547,6 @@
       </div>
     </section>
   </main>
-
   <script src="/js/app.js"></script>
 </body>
 
