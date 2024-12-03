@@ -52,8 +52,17 @@
       </button>
     </div>
   </header>
-
   <main class="h-[150vh] px-4">
+    <section class="mt-24"> 
+      <div class="w-full h-[60px] border-white border-4 bg-[#1a1a1a] p-2 flex justify-center gap-4">
+        <button onclick="afficherFermerFormule('open')"
+          class="bg-green-600 hover:bg-green-700 w-full h-full text-white text-xs sm:text-sm font-bold rounded-lg">
+          Ajouter Nouveaux joueur
+        </button>
+        <input class="w-full h-full px-3 py-1 rounded-lg text-black text-sm mt-3 mb-2 outline-none" type="text" name="search"
+          id="search-player" placeholder="Search by name, position, country..." autocomplete="off">
+      </div>
+    </section>
     <section class="w-[90vw] h-[150vh] flex flex-wrap">
       <div id="terrain-contents" class="w-full h-[100vh] lg:w-[70%] flex justify-center">
         <div id="terrain" class="relative border-white border-4 w-full h-full bg-[#0a2e1a]">

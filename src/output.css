@@ -618,6 +618,18 @@ video {
   margin-top: 0.2rem;
 }
 
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mt-24 {
+  margin-top: 6rem;
+}
+
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
 .block {
   display: block;
 }
@@ -660,6 +672,10 @@ video {
 
 .h-full {
   height: 100%;
+}
+
+.h-\[60px\] {
+  height: 60px;
 }
 
 .min-h-\[70px\] {
@@ -758,6 +774,10 @@ video {
   gap: 1.5rem;
 }
 
+.gap-4 {
+  gap: 1rem;
+}
+
 .overflow-y-auto {
   overflow-y: auto;
 }
@@ -843,6 +863,10 @@ video {
   padding: 1rem;
 }
 
+.p-2 {
+  padding: 0.5rem;
+}
+
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -863,6 +887,11 @@ video {
   padding-bottom: 1rem;
 }
 
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
 .pt-\[0\.15rem\] {
   padding-top: 0.15rem;
 }
@@ -879,6 +908,11 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .font-bold {
@@ -903,6 +937,11 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
+}
+
 .opacity-20 {
   opacity: 0.2;
 }
@@ -917,6 +956,11 @@ video {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.outline-none {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 
 .transition-all {
@@ -1076,6 +1120,11 @@ video {
   .sm\:px-10 {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
+  }
+
+  .sm\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 }
 
