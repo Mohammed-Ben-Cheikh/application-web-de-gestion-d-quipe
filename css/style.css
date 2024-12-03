@@ -5,12 +5,12 @@
 }
 
 header {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.652), rgba(0, 0, 0, 0.696)), url("/images/timothy-tan-PAe2UhGo-S4-unsplash.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.652), rgba(0, 0, 0, 0.696)), url("./images/timothy-tan-PAe2UhGo-S4-unsplash.jpg");
     background-size: cover;
 }
 
 body {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.652), rgba(0, 0, 0, 0.696)), url("/images/timothy-tan-PAe2UhGo-S4-unsplash.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.652), rgba(0, 0, 0, 0.696)), url("./images/timothy-tan-PAe2UhGo-S4-unsplash.jpg");
     background-size: cover;
     background-color: #121212;
     color: white;
