@@ -272,4 +272,126 @@ function afficherJoueurs(players) {
     container.innerHTML = cardsHTML
 }
 
+function ajouterPlayer() {
+    let position = document.getElementById('playerPosition').value.toUpperCase();
+    let newPlayer = {};
 
+    // Regex pour valider les champs
+    const nameRegex = /^[A-Za-z\s]+$/; // Nom : lettres et espaces uniquement
+    const ratingRegex = /^(100|[1-9][0-9]?)$/; // Note : entre 1 et 100
+    const photoRegex = /^(http|https):\/\/.+/; // Photo : URL valide
+    const flagRegex = /^(http|https):\/\/.+/; // Drapeau : URL valide
+    const logoRegex = /^(http|https):\/\/.+/; // Logo : URL valide
+    const statsRegex = /^(100|[1-9][0-9]?)$/; // Note : entre 1 et 100
+
+    // Vérification du nom du joueur
+    const playerName = document.getElementById('playerName').value;
+    if (!nameRegex.test(playerName)) {
+        alert("Le nom du joueur doit contenir uniquement des lettres et des espaces.");
+        return; // Sortir de la fonction si la validation échoue
+    }
+
+    // Vérification de la note
+    const playerRating = document.getElementById('playerRating').value;
+    if (!ratingRegex.test(playerRating)) {
+        alert("La note doit être un nombre entre 1 et 100.");
+        return;
+    }
+
+    // Vérification de l'URL de la photo
+    const playerPhoto = document.getElementById('playerPhoto').value;
+    if (!photoRegex.test(playerPhoto)) {
+        alert("L'URL de la photo doit être valide.");
+        return;
+    }
+
+    // Vérification de l'URL du drapeau
+    const playerFlag = document.getElementById('nationalitySelect').value;
+    if (!flagRegex.test(playerFlag)) {
+        alert("L'URL du drapeau doit être valide.");
+        return;
+    }
+
+    // Vérification de l'URL du logo
+    const playerLogo = document.getElementById('clubSelect').value;
+    if (!logoRegex.test(playerLogo)) {
+        alert("L'URL du logo doit être valide.");
+        return;
+    }
+
+    // Vérification des statistiques (pour GK)
+    if (position === "GK") {
+        const diving = document.getElementById('diving').value;
+        const handling = document.getElementById('handling').value;
+        const kicking = document.getElementById('kicking').value;
+        const reflexes = document.getElementById('reflexes').value;
+        const speed = document.getElementById('speed').value;
+        const positioning = document.getElementById('positioning').value;
+
+        if (![diving, handling, kicking, reflexes, speed, positioning].every(stat => statsRegex.test(stat))) {
+            alert("Les statistiques doivent être des nombres.");
+            return;
+        }
+
+        newPlayer = {
+            name: playerName,
+            rating: parseInt(playerRating),
+            position: position,
+            photo: playerPhoto,
+            flag: playerFlag,
+            logo: playerLogo,
+            diving: parseInt(diving),
+            handling: parseInt(handling),
+            kicking: parseInt(kicking),
+            reflexes: parseInt(reflexes),
+            speed: parseInt(speed),
+            positioning: parseInt(positioning)
+        };
+        addPlayerToPosition(newPlayer);
+    } else {
+        // Vérification des statistiques (pour les autres positions)
+        const pace = document.getElementById('pace').value;
+        const shooting = document.getElementById('shooting').value;
+        const passing = document.getElementById('passing').value;
+        const dribbling = document.getElementById('dribbling').value;
+        const defending = document.getElementById('defending').value;
+        const physical = document.getElementById('physical').value;
+
+        if (![pace, shooting, passing, dribbling, defending, physical].every(stat => statsRegex.test(stat))) {
+            alert("Les statistiques doivent être des nombres.");
+            return;
+        }
+
+        newPlayer = {
+            name: playerName,
+            rating: parseInt(playerRating),
+            position: position,
+            photo: playerPhoto,
+            flag: playerFlag,
+            logo: playerLogo,
+            pace: parseInt(pace),
+            shooting: parseInt(shooting),
+            passing: parseInt(passing),
+            dribbling: parseInt(dribbling),
+            defending: parseInt(defending),
+            physical: parseInt(physical)
+        }
+        addPlayerToPosition(newPlayer);
+    }
+    document.getElementById("addPlayerForm").classList.add("hidden");
+    filterJoueursParPosition(position);
+}
+
+// Fonction pour ajouter un joueur à une position spécifique
+function addPlayerToPosition(player) {
+    const position = player.position;
+    for (let key in joueurChangement ){
+        if ( key === position ){
+            joueurChangement[position].push(player);
+        }
+    }
+    let dataForPosition = JSON.parse(localStorage.getItem(position)) || [];
+    console.log(position);
+    dataForPosition.push(player);
+    localStorage.setItem(position, JSON.stringify(dataForPosition));
+}
