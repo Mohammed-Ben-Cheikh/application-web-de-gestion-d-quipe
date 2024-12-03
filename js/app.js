@@ -395,3 +395,250 @@ function addPlayerToPosition(player) {
     dataForPosition.push(player);
     localStorage.setItem(position, JSON.stringify(dataForPosition));
 }
+
+
+function joueurDansTerrainFunction(playerName,position) {
+    let joueurPosition = localStorage.getItem("joueur Position:");
+    console.log(joueurPosition);
+    let player = null;
+    for (let position in joueurChangement) {
+        let players = joueurChangement[position];
+        if (players && players.length > 0) {
+            player = players.find(p => p.name === playerName);
+            if (player) {
+                for (let position in joueurDansTerrain) {
+                    if (joueurPosition === position) {
+                        let data = JSON.parse(localStorage.getItem("joueurDansTerrain"));
+                        if (joueurDansTerrain[position].length === 0 && data[position].length === 0) {
+                            supprimerJoueurDeChangementFunction(playerName)
+                            joueurDansTerrain[position].push(player);
+                            localStorage.setItem("joueurDansTerrain", JSON.stringify(joueurDansTerrain));
+                            afficherJoueursDansTerrain()
+                        } else {
+                            alert(`Un joueur est déjà présent dans la position ${position}.`);
+                        }
+                    }
+                }
+                console.log("Player found:", player);
+                break;
+            }
+        }
+    }
+    if (!player) {
+        console.log("Player not found");
+    }
+    localStorage.removeItem("joueur Position:");
+    joueurChangementFunction()
+    document.getElementById("svg").classList.remove("animate-spin");
+}
+
+function afficherJoueursDansTerrain() {
+    let joueurDansTerrain = JSON.parse(localStorage.getItem("joueurDansTerrain"));
+    for (let position in joueurDansTerrain) {
+        if (joueurDansTerrain[position] && joueurDansTerrain[position].length > 0) {
+            console.log(`Players in position ${position}:`, joueurDansTerrain[position]);
+            const playersInPosition = joueurDansTerrain[position];
+            const validPositions = ['GK', 'LB', 'LCB', 'RCB', 'RB', 'LCM', 'CM', 'RCM', 'LW', 'ST', 'RW'];
+            if (validPositions.includes(position)) {
+                localStorage.setItem("joueur Position:", position);
+                let playerCardsHTML;
+                for (let player of playersInPosition) {
+                    if (player.position === "GK") {
+                        playerCardsHTML = `
+            <div onclick="createEmptyCard(this.parentElement.id,'${player.position}','${player.name}')" class="h-full relative p-1">
+                <div class="relative bg-black rounded-lg shadow-lg h-[150px] transition-transform hover:scale-105 cursor-pointer">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-green-500 via-yellow-400 to-red-500 opacity-20 rounded-lg group-hover:blur-lg transition-all duration-300">
+                    </div>
+                    <div class="relative p-1 h-full flex flex-col justify-around">
+                        <div class="flex justify-between items-center">
+                            <div class="bg-yellow-500 text-white rounded-full w-6 h-6 flex items-center justify-center">
+                                <span class="text-[0.65rem] font-bold">${player.rating}</span>
+                            </div>
+                            <!-- Photo du joueur -->
+                            <div class="flex justify-center -mt-2">
+                                <img src="${player.photo}" alt="${player.name}"
+                                    class="w-10 h-10 rounded-full border-4 border-white object-cover">
+                            </div>
+                            <div class="bg-yellow-500 text-white rounded-full w-6 h-6 flex items-center justify-center">
+                                <span class="text-[0.65rem] font-bold">${player.position}</span>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h2 class="text-[0.65rem] font-bold text-white mb-1">${player.name}</h2>
+                        </div>
+                        <div class="flex justify-center items-center gap-1">
+                            <img src="${player.flag}" alt="Drapeau" class="w-4 h-2 rounded shadow">
+                            <img src="${player.logo}" alt="Club" class="w-4 h-4 rounded shadow">
+                        </div>
+                        <div class="flex justify-around flex-col gap-1">
+                            <div class="flex justify-around">
+                                <div class="flex flex-col items-center">
+                                    <span class="text-white text-[0.65rem] font-bold">DIV</span>
+                                    <span class="text-white block text-[0.65rem]">${player.diving}</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <span class="text-white text-[0.65rem] font-bold">HAN</span>
+                                    <span class="text-white block text-[0.65rem]">${player.handling}</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <span class="text-white text-[0.65rem] font-bold">KIC</span>
+                                    <span class="text-white block text-[0.65rem]">${player.kicking}</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-around">
+                                <div class="flex flex-col items-center">
+                                    <span class="text-white text-[0.65rem] font-bold">REF</span>
+                                    <span class="text-white block text-[0.65rem]">${player.reflexes}</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <span class="text-white text-[0.65rem] font-bold">SPD</span>
+                                    <span class="text-white block text-[0.65rem]">${player.speed}</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <span class="text-white text-[0.65rem] font-bold">POS</span>
+                                    <span class="text-white block text-[0.65rem]">${player.positioning}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+                    } else {
+                        playerCardsHTML = `
+            <div onclick="createEmptyCard(this.parentElement.id,'${player.position}','${player.name}')" class="relative p-1">
+                <div class="relative bg-black rounded-lg shadow-lg h-[150px] transition-transform hover:scale-105 cursor-pointer">
+                    <!-- Effet de gradient -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-green-500 via-yellow-400 to-red-500 opacity-20 rounded-lg group-hover:blur-lg transition-all duration-300">
+                    </div>
+                    <!-- Contenu principal -->
+                    <div class="relative p-1 h-full flex flex-col justify-around">
+                        <!-- En-tête avec rating et position -->
+                        <div class="flex justify-between items-center">
+                            <div class="bg-yellow-500 text-white rounded-full w-8 h-8 flex items-center justify-center">
+                                <span class="text-[0.65rem] font-bold">${player.rating}</span>
+                            </div>
+                            <!-- Photo du joueur -->
+                            <div class="flex justify-center -mt-2">
+                                <img src="${player.photo}" alt="${player.name}"
+                                    class="w-10 h-10 rounded-full border-4 border-white object-cover">
+                            </div>
+                            <div class="bg-yellow-500 text-white rounded-full w-8 h-8 flex items-center justify-center">
+                                <span class="text-[0.65rem] font-bold">${player.position}</span>
+                            </div>
+                        </div>
+                        <!-- Informations du joueur -->
+                        <div class="text-center">
+                            <div class="flex flex-col items-center">
+                                <h2 class="text-[0.65rem] font-bold text-white mb-1">${player.name}</h2>
+                            </div>
+                            <div class="flex justify-center items-center gap-1">
+                                <img src="${player.flag}" alt="Drapeau" class="w-4 h-4 rounded shadow">
+                                <img src="${player.logo}" alt="Club" class="w-4 h-4 rounded shadow">
+                            </div>
+                        </div>
+                        <!-- Statistiques -->
+                        <div class="flex justify-around flex-col gap-1">
+                            <div class="flex justify-around">
+                                <div class="flex flex-col items-center">
+                                    <span class="text-white text-[0.65rem] font-bold">PAC</span>
+                                    <span class="text-white block text-[0.65rem]">${player.pace}</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <span class="text-white text-[0.65rem] font-bold">SHO</span>
+                                    <span class="text-white block text-[0.65rem]">${player.shooting}</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <span class="text-white text-[0.65rem] font-bold">PAS</span>
+                                    <span class="text-white block text-[0.65rem]">${player.passing}</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-around">
+                                <div class="flex flex-col items-center">
+                                    <span class="text-white text-[0.65rem] font-bold">DRI</span>
+                                    <span class="text-white block text-[0.65rem]">${player.dribbling}</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <span class="text-white text-[0.65rem] font-bold">DEF</span>
+                                    <span class="text-white block text-[0.65rem]">${player.defending}</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <span class="text-white text-[0.65rem] font-bold">PHY</span>
+                                    <span class="text-white block text-[0.65rem]">${player.physical}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                        `;
+                    }
+                    console.log("la position de joueur ajoutée:",player.position);
+                }
+                // Set the inner HTML for the current position
+                document.getElementById(position).innerHTML = playerCardsHTML;
+            } else {
+                console.error('Position est vide :', position);
+            }
+        } else {
+            console.log(`No players found for position ${position}`);
+        }
+    }
+}
+
+// Fonction pour ajouter dans le terrain
+function ajoutDansTerrain(id) {
+    document.getElementById("svg").classList.add("animate-spin");
+    filterJoueursParPosition(id)
+    console.log("Position:", id);
+    switch (id) {
+        case 'GK':
+            localStorage.setItem("joueur Position:", id)
+            document.getElementById(id).innerHTML
+            break;
+        case 'LB':
+            localStorage.setItem("joueur Position:", id)
+            document.getElementById(id).innerHTML
+            break;
+        case 'LCB':
+            localStorage.setItem("joueur Position:", id)
+            document.getElementById(id).innerHTML
+            break;
+        case 'RCB':
+            localStorage.setItem("joueur Position:", id)
+            document.getElementById(id).innerHTML
+            break;
+        case 'RB':
+            localStorage.setItem("joueur Position:", id)
+            document.getElementById(id).innerHTML
+            break;
+        case 'LCM':
+            localStorage.setItem("joueur Position:", id)
+            document.getElementById(id).innerHTML
+            break;
+        case 'CM':
+            localStorage.setItem("joueur Position:", id)
+            document.getElementById(id).innerHTML
+            break;
+        case 'RCM':
+            localStorage.setItem("joueur Position:", id)
+            document.getElementById(id).innerHTML
+            break;
+        case 'LW':
+            localStorage.setItem("joueur Position:", id)
+            document.getElementById(id).innerHTML
+            break;
+        case 'ST':
+            localStorage.setItem("joueur Position:", id)
+            document.getElementById(id).innerHTML
+            break;
+        case 'RW':
+            localStorage.setItem("joueur Position:", id)
+            document.getElementById(id).innerHTML
+            break;
+        default:
+            console.error('Position non reconnue:', id);
+    }
+
+}
