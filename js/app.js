@@ -676,3 +676,60 @@ function filterJoueursParPosition(id) {
     const positionToDisplay = positionMap[id] || id; // Use mapped position or the original id
     afficherJoueursParPosition(positionToDisplay);
 }
+
+
+// fonction pour créer une carte vide
+function createEmptyCard(parentElementId, playerPosition, playerName) {
+    console.log(1, parentElementId, 2, playerPosition, 3, playerName);
+    for (let position in joueurDansTerrain) {
+        if (position === parentElementId) {
+            console.log(1, position, 2, playerPosition);
+            let data1 = JSON.parse(localStorage.getItem("joueurDansTerrain"));
+            if (data1[parentElementId].length > 0) {
+                if (data1[parentElementId].some(p => p.name === playerName)) {
+                    let data2 = JSON.parse(localStorage.getItem(playerPosition));
+                    let player = data1[parentElementId].find(p => p.name === playerName);
+                    console.log(player);
+                    data2.push(player);
+                    joueurDansTerrain[position] = [];
+                    localStorage.setItem(playerPosition, JSON.stringify(data2));
+                    data1[parentElementId] = data1[parentElementId].filter(p => p.name !== playerName);
+                    localStorage.setItem("joueurDansTerrain", JSON.stringify(data1));
+                    joueurChangementFunction()
+                    filterJoueursParPosition(parentElementId)
+                } else {
+                    alert(`Le joueur ${playerName} n'est pas trouvé dans la position ${position}.`);
+                }
+            } else {
+                alert(`Aucun joueur trouvé dans la position ${position}.`);
+            }
+        }
+    }
+
+    if (parentElementId === "GK" || parentElementId === "LB" || parentElementId === "LCB" || parentElementId === "RCB" || parentElementId === "RB" || parentElementId === "LCM" || parentElementId === "CM" || parentElementId === "RCM" || parentElementId === "LW" || parentElementId === "ST" || parentElementId === "RW") {
+        let parentElement = document.getElementById(parentElementId)
+        const emptyCard = document.createElement('div');
+        emptyCard.innerHTML = `
+                                <!-- Carte -->
+                        <div
+                        class="relative w-[100%] h-[100%] bg-black rounded-lg shadow-lg transition-transform transform hover:scale-105 group">
+                        <!-- Effet lumineux au survol -->
+                        <div
+                            class="bg-green-500 opacity-20 hover:blur-xl rounded-lg group-hover:blur-2xl transition-all duration-300 w-[100%] h-[100%]">
+                        </div>
+                        <!-- Contenu de la carte -->
+                        <div class="absolute inset-0 flex items-center justify-center z-20">
+                            <div class="w-4 h-4 md:w-8 md:h-8 border-2 border-green-500 flex items-center justify-center">
+                            <span class="text-green-500 md:text-2xl text-lg font-bold">+</span>
+                            </div>
+                        </div>
+                        </div>
+                        <!-- Bouton "CB" -->
+                        <button
+                        class="w-8 h-5 md:w-12 md:h-6 mt-[0.2rem] pt-[0.15rem] bg-gray-900 text-white md:font-medium text-[0.65rem] md:text-sm rounded-full shadow-md hover:bg-gray-700 focus:outline-none">
+                        ${playerPosition}
+                        </button>`;
+        parentElement.innerHTML = emptyCard.innerHTML;
+    }
+    document.getElementById("svg").classList.remove("animate-spin");
+}
